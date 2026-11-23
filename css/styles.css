@@ -1,0 +1,764 @@
+/* C:\AIJob_Hunter\study_bankirchik\bankirchik\css\styles.css */
+/* Официальная дизайн-система «Банкирчик» (MVP 18.11.2026) */
+/* Жёлто-красная детская сочная тема: Nunito 600..900, 3D-кнопки, пиратская карта */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap');
+
+:root {
+  /* Палитра из ТЗ Раздел 3 */
+  --bg-top: #FFF8D6;
+  --bg-bottom: #FFE680;
+  --yellow: #FFC21A;
+  --yellow-light: #FFF4C2;
+  --red: #E63946;
+  --red-dark: #A61B25;
+  --ink: #3B1F0E;
+  --muted: #7A5A3A;
+  --shadow-color: #EAC54F;
+  --success: #3FAE5A;
+  --success-bg: #E3F6E8;
+  --parchment: #FDF5E6;
+  --parchment-border: #8B5A2B;
+  
+  /* 3D Shadows & Radius */
+  --radius-card: 24px;
+  --radius-btn: 18px;
+  --radius-chip: 16px;
+  --shadow-3d: 0 5px 0 var(--shadow-color);
+  --shadow-btn-red: 0 5px 0 var(--red-dark);
+  --shadow-btn-yellow: 0 5px 0 #D49B0D;
+  --shadow-btn-white: 0 5px 0 #D8D2C2;
+  --shadow-card: 0 10px 25px rgba(59, 31, 14, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  height: 100%;
+  /* Теплый фон детской игровой комнаты вместо темной пустоты */
+  background: radial-gradient(circle at 50% 25%, #FFFDF2 0%, #FFF4CC 55%, #FFE799 100%);
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Рамка смартфона на десктопе / нативный full-screen на телефоне */
+#app, .mobile-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 100dvh;
+  margin: 0 auto;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--bg-top) 0%, #FFF1B8 45%, var(--bg-bottom) 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Десктопный вид: стильный аккуратный смартфон с реалистичной тенью */
+@media (min-width: 480px) and (min-height: 650px) {
+  #app, .mobile-wrapper {
+    height: min(860px, 96dvh);
+    border-radius: 42px;
+    border: 10px solid #2B231D;
+    box-shadow: 0 0 0 2px #E8C175, 0 24px 64px rgba(75, 45, 15, 0.28);
+  }
+}
+
+/* Основной контейнер экрана */
+.screen-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 16px 20px 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.screen-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.screen-scroll::-webkit-scrollbar-thumb {
+  background: rgba(139, 90, 43, 0.25);
+  border-radius: 10px;
+}
+
+/* --- ВЕРХНЯЯ ШАПКА РЕБЁНКА (Header) --- */
+.app-header {
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 3px solid rgba(234, 197, 79, 0.4);
+  z-index: 50;
+  flex-shrink: 0;
+}
+
+.user-badge-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #FFF4C2;
+  border: 2px solid var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 3px 0 #EAC54F;
+}
+
+.user-info-text .user-name {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.user-info-text .user-sub {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.purse-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Баджи кошелька и копилки */
+.pill-badge {
+  background: #FFFFFF;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: 0 3px 0 #EAC54F;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 2px solid var(--yellow);
+  color: var(--ink);
+  transition: transform 0.2s;
+}
+
+.pill-badge.piggy-pill {
+  border-color: #FFA6B5;
+  color: #D62246;
+  box-shadow: 0 3px 0 #F8A5B2;
+}
+
+.pill-badge:active {
+  transform: scale(0.95);
+}
+
+/* --- 3D КНОПКИ (ТЗ: сплошная тень вниз 5px, при нажатии опускаются на 3px) --- */
+.btn-3d {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-weight: 900;
+  font-size: 16px;
+  border-radius: var(--radius-btn);
+  padding: 12px 20px;
+  border: 0;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+/* Красная главная кнопка */
+.btn-3d.btn-primary {
+  background: var(--red);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-btn-red);
+}
+.btn-3d.btn-primary:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--red-dark);
+}
+
+/* Жёлтая вторичная кнопка */
+.btn-3d.btn-secondary {
+  background: var(--yellow);
+  color: var(--ink);
+  box-shadow: var(--shadow-btn-yellow);
+}
+.btn-3d.btn-secondary:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #D49B0D;
+}
+
+/* Белая карточная кнопка */
+.btn-3d.btn-white {
+  background: #FFFFFF;
+  color: var(--ink);
+  box-shadow: var(--shadow-btn-white);
+  border: 2px solid #EAE3D2;
+}
+.btn-3d.btn-white:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #D8D2C2;
+}
+
+/* Зелёная кнопка успеха */
+.btn-3d.btn-success {
+  background: var(--success);
+  color: #FFFFFF;
+  box-shadow: 0 5px 0 #2E8B45;
+}
+.btn-3d.btn-success:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #2E8B45;
+}
+
+/* Маленькая кнопка для хедера */
+.btn-3d.btn-small {
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 12px;
+  box-shadow: 0 3px 0 #D49B0D;
+}
+.btn-3d.btn-small:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #D49B0D;
+}
+
+/* --- КАРТОЧКИ --- */
+.card-chunky {
+  background: #FFFFFF;
+  border-radius: var(--radius-card);
+  padding: 16px 18px;
+  box-shadow: 0 6px 0 var(--shadow-color), var(--shadow-card);
+  border: 2.5px solid #FFE680;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+/* --- КАРТА СОКРОВИЩ (PIRATE TREASURE MAP) --- */
+.pirate-map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 840px;
+  margin: 12px 0 18px 0;
+  background: #FFFDF0;
+  border-radius: 28px;
+  border: 4px dashed #9E6B38;
+  box-shadow: inset 0 0 40px rgba(212, 163, 115, 0.25), 0 8px 0 var(--shadow-color);
+  overflow: hidden;
+}
+
+/* Декоративные элементы пиратской карты */
+.map-decor-compass {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 34px;
+  opacity: 0.65;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.map-decor-ship {
+  position: absolute;
+  top: 45%;
+  right: 12px;
+  font-size: 28px;
+  opacity: 0.5;
+  animation: ship-float 4s ease-in-out infinite alternate;
+}
+
+.map-decor-palms {
+  position: absolute;
+  bottom: 20px;
+  left: 14px;
+  font-size: 26px;
+  opacity: 0.55;
+}
+
+@keyframes ship-float {
+  from { transform: translateY(0) rotate(-2deg); }
+  to { transform: translateY(-6px) rotate(3deg); }
+}
+
+.map-svg-path {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Кнопка-остров на карте */
+.island-btn {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+  margin: -38px 0 0 -38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10;
+  outline: none;
+}
+
+/* Лейбл острова (висит строго под кнопкой, не перекрывает иконку) */
+.island-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--ink);
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3px 8px;
+  border-radius: 12px;
+  border: 1.5px solid #EAC54F;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+}
+
+/* 1. ТЕКУЩИЙ АКТИВНЫЙ ОСТРОВ (Now) */
+.island-btn.now {
+  background: radial-gradient(circle at 35% 30%, #FFF375, #FFC21A 60%, #E68A00);
+  border: 4px solid var(--red);
+  box-shadow: 0 8px 0 #A86500, 0 10px 24px rgba(230, 57, 70, 0.4);
+  animation: pulse-current-island 1.8s infinite ease-in-out;
+}
+
+.island-btn.now .island-label {
+  background: #FFF9E6;
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.island-btn.now .hamster-avatar-top {
+  position: absolute;
+  top: -26px;
+  font-size: 28px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
+  animation: bounce-hamster-avatar 0.8s infinite alternate ease-in-out;
+}
+
+/* 2. ПРОЙДЕННЫЙ ОСТРОВ (Done) */
+.island-btn.done {
+  background: radial-gradient(circle at 35% 30%, #E3F6E8, #3FAE5A 70%, #2B8A44);
+  border: 3.5px solid #287A3C;
+  box-shadow: 0 6px 0 #1D5E2D;
+}
+
+.island-btn.done::after {
+  content: "⭐";
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* 3. ЗАКРЫТЫЙ ОСТРОВ (Locked) */
+.island-btn.locked {
+  background: radial-gradient(circle at 35% 30%, #F5EDE0, #E4D5BE 70%, #CCAFA0);
+  border: 3px solid #BA9B7B;
+  box-shadow: 0 5px 0 #9E7D5F;
+  cursor: pointer;
+  opacity: 0.88;
+}
+
+.island-btn.locked .island-icon-inner {
+  filter: grayscale(0.85);
+  opacity: 0.55;
+}
+
+.island-btn.locked .lock-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  font-size: 18px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  border: 1px solid #C4B08F;
+}
+
+@keyframes pulse-current-island {
+  0% { transform: scale(1); box-shadow: 0 8px 0 #A86500, 0 10px 24px rgba(230, 57, 70, 0.4); }
+  50% { transform: scale(1.08); box-shadow: 0 10px 0 #A86500, 0 14px 30px rgba(230, 57, 70, 0.65); }
+  100% { transform: scale(1); box-shadow: 0 8px 0 #A86500, 0 10px 24px rgba(230, 57, 70, 0.4); }
+}
+
+@keyframes bounce-hamster-avatar {
+  from { transform: translateY(0); }
+  to { transform: translateY(-7px); }
+}
+
+/* --- КОМПАКТНЫЙ ВИДЖЕТ ХОМЯКА-ПОМОЩНИКА (Маскот) --- */
+.hamster-helper-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 2px solid #FFE680;
+  border-radius: 20px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 14px rgba(59, 31, 14, 0.07);
+  cursor: pointer;
+  margin: 0 14px 6px 14px;
+  flex-shrink: 0;
+  transition: transform 0.15s;
+}
+
+.hamster-helper-strip:active {
+  transform: scale(0.98);
+}
+
+.hamster-avatar-box {
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.hamster-speech-bubble {
+  flex: 1;
+}
+
+.hamster-bubble-text {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.hamster-bubble-hint {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* --- НИЖНЯЯ ПАНЕЛЬ НАВИГАЦИИ (Карта · Игры · От мамы · Я) --- */
+.bottom-tab-bar {
+  height: 64px;
+  background: #FFFFFF;
+  border-top: 2.5px solid #F0E6D2;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 50;
+  flex-shrink: 0;
+  box-shadow: 0 -3px 12px rgba(59, 31, 14, 0.05);
+}
+
+.nav-tab-btn {
+  background: transparent;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+  color: var(--muted);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 6px 14px;
+  border-radius: 14px;
+  position: relative;
+  transition: all 0.15s;
+}
+
+.nav-tab-btn.active {
+  color: var(--red);
+  transform: translateY(-2px);
+}
+
+.nav-tab-btn.active .tab-icon {
+  transform: scale(1.2);
+}
+
+.tab-icon {
+  font-size: 22px;
+  transition: transform 0.2s;
+}
+
+.tab-badge-dot {
+  position: absolute;
+  top: 4px;
+  right: 14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 6px rgba(230, 57, 70, 0.6);
+}
+
+/* --- ИГРОВОЙ ЭКРАН (Game Shell) --- */
+.game-viewport-card {
+  background: #FFFFFF;
+  border-radius: 28px;
+  border: 3.5px solid #FFE680;
+  box-shadow: 0 8px 0 var(--shadow-color), var(--shadow-card);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 20px);
+  overflow: hidden;
+}
+
+.game-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #FFF0BA;
+  margin-bottom: 12px;
+}
+
+/* --- МОДАЛЬНЫЕ ОКНА И ДИАЛОГИ --- */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 20, 10, 0.65);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 200;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content-card {
+  background: #FFFFFF;
+  border-radius: 28px;
+  padding: 24px;
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  border: 4px solid #FFC21A;
+  animation: pop-modal 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop-modal {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Взлетающие монеты при победе / подтверждении задания */
+.coin-fly-anim {
+  position: absolute;
+  font-size: 28px;
+  pointer-events: none;
+  z-index: 999;
+  animation: flyToTop 0.8s ease-in forwards;
+}
+
+@keyframes flyToTop {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  50% { transform: translate(var(--dx, 20px), -120px) scale(1.3); opacity: 1; }
+  100% { transform: translate(var(--dx, 20px), -240px) scale(0.6); opacity: 0; }
+}
+
+/* --- СТИЛИ ДЛЯ ВСЕХ 11 МИНИ-ИГР --- */
+.game-view-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px;
+}
+
+.game-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.game-title-box {
+  flex: 1;
+  text-align: center;
+}
+
+.game-level-name {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.game-sub-name {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid #EAE3D2;
+  box-shadow: 0 3px 0 #D8D2C2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  color: var(--ink);
+  transition: transform 0.1s;
+}
+.icon-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #D8D2C2;
+}
+
+.coin-pill {
+  background: #FFF9E6;
+  border: 2px solid var(--yellow);
+  box-shadow: 0 3px 0 #EAC54F;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 0 var(--shadow-color);
+  border: 2px solid #FFE680;
+  margin-bottom: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: 900;
+  font-size: 15px;
+  border-radius: 16px;
+  padding: 12px 18px;
+  border: 0;
+  cursor: pointer;
+  width: 100%;
+  text-decoration: none;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.btn-red {
+  background: var(--red);
+  color: #FFFFFF;
+  box-shadow: 0 5px 0 var(--red-dark);
+}
+.btn-red:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--red-dark);
+}
+
+.btn-yellow {
+  background: var(--yellow);
+  color: var(--ink);
+  box-shadow: 0 5px 0 #D49B0D;
+}
+.btn-yellow:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #D49B0D;
+}
+
+.btn-white {
+  background: #FFFFFF;
+  color: var(--ink);
+  box-shadow: 0 5px 0 #D8D2C2;
+  border: 2px solid #EAE3D2;
+}
+.btn-white:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #D8D2C2;
+}
+
+.modal-content {
+  background: #FFFFFF;
+  border-radius: 28px;
+  padding: 24px;
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  border: 4px solid #FFC21A;
+  animation: pop-modal 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.shake {
+  animation: shake-anim 0.35s ease-in-out;
+}
+
+@keyframes shake-anim {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}

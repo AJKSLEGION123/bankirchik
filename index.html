@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Банкирчик — Финансовая игра для детей и родителей</title>
+  
+  <!-- PWA & Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+  <meta name="theme-color" content="#FFC21A">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Банкирчик">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Typography: Nunito 600..900 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Контейнер мобильного интерфейса (max-width 480px, responsive 390x844) -->
+  <div id="app" class="mobile-wrapper">
+    <!-- Приложение монтируется динамически через BankirchikApp -->
+  </div>
+
+  <!-- Core Data & Utilities -->
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/hamster.js"></script>
+
+  <!-- All 11 Mini-Games -->
+  <script src="js/games/clean_house.js"></script>
+  <script src="js/games/fruit_garden.js"></script>
+  <script src="js/games/piggy_bank.js"></script>
+  <script src="js/games/market.js"></script>
+  <script src="js/games/need_want.js"></script>
+  <script src="js/games/patience_island.js"></script>
+  <script src="js/games/first_bank.js"></script>
+  <script src="js/games/treasure_chest.js"></script>
+  <script src="js/games/lemonade_stand.js"></script>
+  <script src="js/games/exact_sum.js"></script>
+  <script src="js/games/infinite_quiz.js"></script>
+
+  <!-- Application Shell Router -->
+  <script src="js/app.js"></script>
+</body>
+</html>
